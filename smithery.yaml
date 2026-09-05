@@ -1,0 +1,43 @@
+# Smithery metadata for AgentPay (stdio MCP via uvx / GitHub)
+name: agentpay
+description: >
+  Xiaohongshu (小红书) note & China social listening tools with x402 USDC
+  micropayments on Base. Agents pay per call via AgentPay gateway.
+homepage: https://github.com/yyxqqq777/mcp-server-agentpay
+startCommand:
+  type: stdio
+  configSchema:
+    type: object
+    required: [GATEWAY_BASE_URL]
+    properties:
+      GATEWAY_BASE_URL:
+        type: string
+        title: AgentPay Gateway URL
+        description: Public x402 gateway (e.g. https://agentpay-xhs-production.up.railway.app)
+        default: https://agentpay-xhs-production.up.railway.app
+      AGENT_PRIVATE_KEY:
+        type: string
+        title: Agent wallet private key
+        description: EVM private key that holds USDC for micropayments (Base Sepolia or Mainnet)
+        secret: true
+      MAX_SPEND_PER_CALL:
+        type: string
+        title: Max USDC per call
+        default: "0.10"
+      PAYMENT_MODE:
+        type: string
+        title: Payment mode
+        default: production
+        enum: [demo, production]
+  commandFunction: |-
+    (config) => ({
+      command: 'uvx',
+      args: ['mcp-server-agentpay'],
+      env: {
+        GATEWAY_BASE_URL: config.GATEWAY_BASE_URL,
+        AGENT_PRIVATE_KEY: config.AGENT_PRIVATE_KEY || '',
+        MAX_SPEND_PER_CALL: config.MAX_SPEND_PER_CALL || '0.10',
+        PAYMENT_MODE: config.PAYMENT_MODE || 'production',
+        PYTHONUNBUFFERED: '1'
+      }
+    })
