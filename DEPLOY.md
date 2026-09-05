@@ -49,24 +49,36 @@ curl -X POST https://api.cdp.coinbase.com/platform/v2/x402/validate \
 
 ## 3. Smithery.ai（MCP 目录）
 
-本仓库 MCP 为 **stdio**（`uvx mcp-server-agentpay`）。发布方式：
+公开仓库：https://github.com/yyxqqq777/mcp-server-agentpay  
 
-1. 先把代码推到公开 GitHub  
-2. 打开 https://smithery.ai/new 连接仓库，或：
+远程 MCP（Streamable HTTP）：
+
+`https://agentpay-xhs-production.up.railway.app/mcp`
+
+发布：
+
+1. 打开 https://smithery.ai/new 并用 GitHub 登录  
+2. 选择 **URL**，填入上面的 `/mcp` 地址  
+3. 名称建议：`@yyxqqq777/agentpay`  
+4. 或 CLI：
 
 ```bash
 npx @smithery/cli auth login
-# 若有远程 Streamable HTTP MCP：
-# smithery mcp publish "https://…/mcp" -n @you/agentpay
+npx @smithery/cli mcp publish \
+  "https://agentpay-xhs-production.up.railway.app/mcp" \
+  -n @yyxqqq777/agentpay \
+  --config-schema ./scripts/smithery-config-schema.json
 ```
 
-用户安装时配置 `GATEWAY_BASE_URL=https://YOUR_RAILWAY_URL` + 付款钱包。
+本地 stdio 安装仍可用 `uvx mcp-server-agentpay`（见 `mcp.json` / `smithery.yaml`）。
 
 ## 4. Glama.ai
 
-1. https://glama.ai → 提交 MCP Server  
-2. 指向 GitHub 仓库 / PyPI `mcp-server-agentpay`  
-3. 在描述中写清：小红书舆情 / x402 付费 / 需自备 USDC 钱包  
+1. 打开 https://glama.ai/mcp/servers → **Add MCP Server**（GitHub 登录）  
+2. Repository：`https://github.com/yyxqqq777/mcp-server-agentpay`  
+3. 名称：`AgentPay`；描述写清小红书 / x402 / 需自备 USDC  
+4. 若提交 Connector：URL 用 `https://agentpay-xhs-production.up.railway.app/mcp`  
+5. 仓库根目录已有 `glama.json`（maintainer: `yyxqqq777`）用于认领 
 
 ## 5. Cloudflare Playground / agentic.market
 
