@@ -1,0 +1,23 @@
+{
+  "type": "object",
+  "required": ["GATEWAY_BASE_URL"],
+  "properties": {
+    "GATEWAY_BASE_URL": {
+      "type": "string",
+      "title": "AgentPay Gateway URL",
+      "description": "Public x402 gateway base URL",
+      "default": "https://agentpay-xhs-production.up.railway.app"
+    },
+    "AGENT_PRIVATE_KEY": {
+      "type": "string",
+      "title": "Agent wallet private key",
+      "description": "EVM private key with USDC for micropayments",
+      "secret": true
+    },
+    "MAX_SPEND_PER_CALL": {
+      "type": "string",
+      "title": "Max USDC per call",
+      "default": "0.10"
+    }
+  }
+}

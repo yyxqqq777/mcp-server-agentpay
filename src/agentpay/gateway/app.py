@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import logging
+from contextlib import asynccontextmanager
 
 import uvicorn
 from fastapi import FastAPI, Query
@@ -11,6 +12,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from agentpay.config import get_settings
 from agentpay.gateway.data import query_wholesale_pricing
 from agentpay.gateway.middleware import X402PaymentMiddleware
+from agentpay.mcp_server.server import mcp as mcp_server
 from agentpay.payment.x402_setup import build_paid_routes, build_resource_server, settlement_info
 from agentpay.xhs.fetcher import fetch_note_detail, fetch_user_notes
 
@@ -21,14 +23,30 @@ logger = logging.getLogger(__name__)
 def create_app() -> FastAPI:
     settings = get_settings()
 
+    # Remote MCP (Streamable HTTP) for Smithery / Glama connectors
+    mcp_http = mcp_server.streamable_http_app(
+        streamable_http_path="/",
+        stateless_http=True,
+        host="0.0.0.0",
+    )
+
+    @asynccontextmanager
+    async def lifespan(_app: FastAPI):
+        async with mcp_http.router.lifespan_context(mcp_http):
+            logger.info("MCP Streamable HTTP mounted at /mcp")
+            yield
+
     app = FastAPI(
         title="AgentPay x402 Gateway",
         description=(
             "Monetized API gateway with HTTP 402 micropayment enforcement. "
-            "Agents pay USDC on Base per request for Xiaohongshu note data and other premium APIs."
+            "Agents pay USDC on Base per request for Xiaohongshu note data and other premium APIs. "
+            "Also exposes MCP tools at /mcp (Streamable HTTP)."
         ),
         version="0.1.0",
+        lifespan=lifespan,
     )
+    app.mount("/mcp", mcp_http)
 
     # Railway/Fly terminate TLS; trust X-Forwarded-* so 402 resource URLs are https://
     from uvicorn.middleware.proxy_headers import ProxyHeadersMiddleware
@@ -79,6 +97,7 @@ def create_app() -> FastAPI:
             "service": "agentpay-gateway",
             "payment_mode": settings.payment_mode,
             "xhs_credentials": settings.has_xhs_credentials,
+            "mcp": "/mcp",
             "settlement": info,
         }
 
