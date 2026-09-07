@@ -75,11 +75,24 @@ Smithery 代理入口：`https://agentpay--yyxqqq777.run.tools`
 
 ## 4. Glama.ai
 
-1. 打开 https://glama.ai/mcp/servers → **Add MCP Server**（GitHub 登录）  
-2. Repository：`https://github.com/yyxqqq777/mcp-server-agentpay`  
-3. 名称：`AgentPay`；描述写清小红书 / x402 / 需自备 USDC  
-4. 若提交 Connector：URL 用 `https://agentpay-xhs-production.up.railway.app/mcp`  
-5. 仓库根目录已有 `glama.json`（maintainer: `yyxqqq777`）用于认领 
+列表页：https://glama.ai/mcp/servers/yyxqqq777/mcp-server-agentpay  
+
+页面上的 **“This server cannot be installed”** 不是因为没提交仓库，而是还没有做 **Glama Release**（容器化构建）。需要你登录后手动操作：
+
+1. 用 GitHub 登录 Glama（账号需是 maintainer：`glama.json` 里已有 `yyxqqq777`）
+2. 打开管理页并点 **Sync Server**（立刻同步最新 README / PyPI）：  
+   https://glama.ai/mcp/servers/yyxqqq777/mcp-server-agentpay/admin
+3. 打开 Dockerfile 管理页：  
+   https://glama.ai/mcp/servers/yyxqqq777/mcp-server-agentpay/admin/dockerfile  
+   - Dockerfile path：`Dockerfile.mcp`（stdio MCP；不要用根目录 `Dockerfile`，那是 Railway Gateway）  
+   - CMD：`mcp-server-agentpay`  
+   - 环境变量：`GATEWAY_BASE_URL`（默认 `https://agentpay-xhs-production.up.railway.app`）、`AGENT_PRIVATE_KEY`（secret）
+4. 点 **Build**（或 **Build & Release**），成功后发布版本 `0.1.1`  
+5. （可选）若提交 Connector：URL 用 `https://agentpay-xhs-production.up.railway.app/mcp`
+
+参考：https://glama.ai/blog/2026-03-15-how-to-make-a-release
+
+仓库已有 `glama.json`（maintainer: `yyxqqq777`）用于认领。GitHub Release：`v0.1.1`。
 
 ## 5. Cloudflare Playground / agentic.market
 
