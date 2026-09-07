@@ -83,13 +83,11 @@ agentpay-gateway
       "command": "uvx",
       "args": ["mcp-server-agentpay"],
       "env": {
-        "GATEWAY_BASE_URL": "https://你的网关地址",
-        "AGENT_PRIVATE_KEY": "0x...",
-        "PYTHONUNBUFFERED": "1"
+        "AGENT_PRIVATE_KEY": "0x..."
       }
     }
   }
 }
 ```
 
-或在 MCP Registry 中搜索 `agentpay` 一键安装。
+只需 `AGENT_PRIVATE_KEY`；网关默认已指向公网 Gateway。或在 MCP Registry 中搜索 `agentpay` 一键安装。
