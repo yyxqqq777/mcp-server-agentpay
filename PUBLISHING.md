@@ -11,41 +11,49 @@
    - `README.md` → `<!-- mcp-name: io.github.<username>/agentpay -->`
    - `pyproject.toml` → `[project.urls]` 中的 GitHub 链接
 
-## 步骤 1：发布到 PyPI
+## 步骤 1：发布到 PyPI（Trusted Publishing，推荐）
+
+1. 打开 https://pypi.org/manage/account/publishing/
+2. 添加 **pending publisher**（项目尚不存在也可以）：
+   - PyPI project name: `mcp-server-agentpay`
+   - Owner: `yyxqqq777`
+   - Repository: `mcp-server-agentpay`
+   - Workflow: `publish.yml`
+   - Environment: `pypi`
+3. 创建 GitHub Release（tag `v0.1.0`）→ Actions 自动上传到 PyPI
+
+本地手动上传（备选）：
 
 ```bash
+# https://pypi.org/manage/account/token/ 创建 token
 pip install build twine
 python -m build
-twine upload dist/*
+TWINE_PASSWORD=pypi-... twine upload dist/* -u __token__
 ```
 
 验证：`uvx mcp-server-agentpay` 应能正常运行。
 
 ## 步骤 2：发布到 MCP Registry
 
+Remote MCP 已可单独上架（不依赖 PyPI）。含 PyPI 包的完整条目需等包上线后再发：
+
 ```bash
-# 安装发布工具
-curl -L "https://github.com/modelcontextprotocol/registry/releases/latest/download/mcp-publisher_$(uname -s | tr '[:upper:]' '[:lower:]')_$(uname -m | sed 's/x86_64/amd64/;s/aarch64/arm64/').tar.gz" | tar xz mcp-publisher
+# 一键：有 PyPI token 时上传包 + 发布完整 server.json
+PYPI_API_TOKEN=pypi-... ./scripts/publish_all.sh
 
-# 验证 server.json
-./mcp-publisher validate
-
-# GitHub OAuth 登录
-./mcp-publisher login github
-
-# 发布
+# 或仅 Registry（GitHub 登录）
+./mcp-publisher login github -token "$(gh auth token)"
 ./mcp-publisher publish
 ```
 
-## 步骤 3：GitHub Actions 自动化（可选）
+当前公网远程入口：`https://agentpay-xhs-production.up.railway.app/mcp`  
+Registry 名：`io.github.yyxqqq777/agentpay`
 
-在 GitHub 仓库 Settings → Secrets 中添加：
+## 步骤 3：GitHub Actions 自动化
 
-| Secret | 用途 |
-|--------|------|
-| `PYPI_API_TOKEN` | PyPI 发布 token |
+仓库已配置 `pypi` Environment + OIDC Trusted Publishing（无需 `PYPI_API_TOKEN` secret）。
 
-创建 GitHub Release（tag 如 `v0.1.0`）即可自动发布到 PyPI + MCP Registry。
+在 PyPI 配好 pending publisher 后，创建 Release（tag 如 `v0.1.0`）即可自动发布到 PyPI + MCP Registry。
 
 ## 步骤 4：部署 Gateway（服务端）
 

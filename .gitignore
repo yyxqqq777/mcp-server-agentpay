@@ -6,6 +6,8 @@ venv/
 .env
 dist/
 build/
+server.remotes-only.json
+mcp-publisher
 .pytest_cache/
 .ruff_cache/
 .mypy_cache/

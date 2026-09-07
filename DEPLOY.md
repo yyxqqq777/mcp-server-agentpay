@@ -88,3 +88,9 @@ npx @smithery/cli mcp publish \
 ## 现实预期
 
 外部 Agent **不会**因为「官方自带 USDC」自动扣款；只有配置了 **带 USDC 的买方钱包** 的 Agent（或接了 x402-wallet MCP）才能付费调用。Bazaar / Smithery 解决的是**被发现**，不是**代付**。
+
+**已完成：**
+
+- 官方 MCP Registry：`io.github.yyxqqq777/agentpay`（Streamable HTTP remote）
+- 公网 Gateway + `/mcp` 健康
+- 至少一笔 Base Sepolia Facilitator 成功结算（Bazaar 索引可能有延迟；`index` 仍为 null 时过几小时再查 CDP validate）

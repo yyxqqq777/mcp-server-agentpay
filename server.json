@@ -3,11 +3,19 @@
   "name": "io.github.yyxqqq777/agentpay",
   "title": "AgentPay",
   "description": "x402 micropayments MCP: Xiaohongshu notes and paid APIs settled in USDC on Base.",
+  "websiteUrl": "https://github.com/yyxqqq777/mcp-server-agentpay",
   "repository": {
     "url": "https://github.com/yyxqqq777/mcp-server-agentpay",
-    "source": "github"
+    "source": "github",
+    "id": "1357808114"
   },
   "version": "0.1.0",
+  "remotes": [
+    {
+      "type": "streamable-http",
+      "url": "https://agentpay-xhs-production.up.railway.app/mcp"
+    }
+  ],
   "packages": [
     {
       "registryType": "pypi",
@@ -23,7 +31,8 @@
           "description": "URL of the x402 payment gateway (e.g. https://agentpay-xhs-production.up.railway.app)",
           "isRequired": true,
           "format": "string",
-          "isSecret": false
+          "isSecret": false,
+          "default": "https://agentpay-xhs-production.up.railway.app"
         },
         {
           "name": "AGENT_PRIVATE_KEY",
@@ -37,14 +46,16 @@
           "description": "Maximum USDC the agent may spend per API call (default: 0.10)",
           "isRequired": false,
           "format": "string",
-          "isSecret": false
+          "isSecret": false,
+          "default": "0.10"
         },
         {
           "name": "PAYMENT_MODE",
           "description": "Payment verification mode: demo (no on-chain) or production",
           "isRequired": false,
           "format": "string",
-          "isSecret": false
+          "isSecret": false,
+          "default": "production"
         }
       ]
     }

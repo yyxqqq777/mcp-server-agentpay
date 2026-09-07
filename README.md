@@ -4,9 +4,17 @@
 
 <!-- mcp-name: io.github.yyxqqq777/agentpay -->
 
-## Install (one command)
+## Install
 
-Works in **Cursor**, **Claude Desktop**, **VS Code**, and any MCP-compatible client:
+### Option A — Remote MCP（推荐，无需本地安装）
+
+在 Cursor / Claude / 任意支持 Streamable HTTP 的客户端添加：
+
+`https://agentpay-xhs-production.up.railway.app/mcp`
+
+官方 Registry 条目：`io.github.yyxqqq777/agentpay`
+
+### Option B — 本地 stdio（`uvx` / PyPI）
 
 ```json
 {
@@ -25,7 +33,7 @@ Works in **Cursor**, **Claude Desktop**, **VS Code**, and any MCP-compatible cli
 }
 ```
 
-Or install permanently:
+或永久安装：
 
 ```bash
 pip install mcp-server-agentpay
@@ -37,9 +45,9 @@ uv tool install mcp-server-agentpay
 
 | Tool | Description | Cost |
 |------|-------------|------|
-| `xhs_get_note_detail` | Xiaohongshu note detail | 0.05 USDC/call |
-| `xhs_get_user_notes` | Xiaohongshu user posted notes list | 0.05 USDC/call |
-| `china_wholesale_pricing_query` | Factory-direct wholesale pricing (1688/Yiwu) | 0.05 USDC/call |
+| `xhs_get_note_detail` | Xiaohongshu note detail | 0.01 USDC/call |
+| `xhs_get_user_notes` | Xiaohongshu user posted notes list | 0.01 USDC/call |
+| `china_wholesale_pricing_query` | Factory-direct wholesale pricing (1688/Yiwu) | 0.01 USDC/call |
 | `agentpay_payment_status` | View payment config, wallet, and spending limits | Free |
 
 ### Example prompts
@@ -54,7 +62,7 @@ uv tool install mcp-server-agentpay
 符合 [Agent Skills](https://agentskills.io)。对外只暴露 **AgentPay 付费小红书接口**，Agent 不知道、也不应调用任何上游爬虫：
 
 ```
-Agent / MCP  --(x402 0.05 USDC)-->  AgentPay Gateway  -->  笔记 JSON
+Agent / MCP  --(x402 0.01 USDC)-->  AgentPay Gateway  -->  笔记 JSON
                                    收款: 你的 Base 钱包
 ```
 
@@ -129,12 +137,11 @@ This package is designed for the [official MCP Registry](https://registry.modelc
 pip install build twine
 python -m build && twine upload dist/*
 
-# 2. Publish to MCP Registry
-curl -L "https://github.com/modelcontextprotocol/registry/releases/latest/download/mcp-publisher_$(uname -s | tr '[:upper:]' '[:lower:]')_$(uname -m | sed 's/x86_64/amd64/;s/aarch64/arm64/').tar.gz" | tar xz mcp-publisher
-./mcp-publisher login github
-./mcp-publisher validate
-./mcp-publisher publish
+# 2. Publish to MCP Registry (packages + remotes)
+./scripts/publish_all.sh
 ```
+
+Or create a GitHub Release (`v0.1.0`) — Actions uses Trusted Publishing to PyPI then updates the Registry.
 
 Before publishing, update `server.json` and README `mcp-name` with your GitHub namespace (`io.github.<username>/agentpay`).
 
