@@ -57,31 +57,11 @@ uv tool install mcp-server-agentpay
 - "Search wholesale prices for wireless earbuds under $3"
 - "What's my AgentPay wallet and spending limit?"
 
-## Agent Skill（可发布 · agentskills.io）
-
-符合 [Agent Skills](https://agentskills.io)。对外只暴露 **AgentPay 付费小红书接口**，Agent 不知道、也不应调用任何上游爬虫：
-
-```
-Agent / MCP  --(x402 0.01 USDC)-->  AgentPay Gateway  -->  笔记 JSON
-                                   收款: 你的 Base 钱包
-```
-
-```bash
-npx skills-ref validate ./skills/xhs-note-fetch
-
-# 本地：Gateway 持有上游密钥；Agent 侧只配 GATEWAY_BASE_URL
-PYTHONPATH=src python -m agentpay.gateway.app
-GATEWAY_BASE_URL=http://127.0.0.1:8402 \
-  python skills/xhs-note-fetch/scripts/fetch_note.py "<笔记链接>"
-```
-
-发布 `skills/xhs-note-fetch` 即可。上游密钥只写在 Gateway 部署环境。
-
 ## Environment Variables
 
 | Variable | Required | Description |
 |----------|----------|-------------|
-| `GATEWAY_BASE_URL` | MCP / Skill | AgentPay 网关地址 |
+| `GATEWAY_BASE_URL` | MCP | AgentPay 网关地址 |
 | `AGENT_PRIVATE_KEY` | Production | 付款钱包私钥 |
 | `MAX_SPEND_PER_CALL` | No | 单次上限（默认 `0.10`） |
 | `PAYMENT_MODE` | Gateway | `demo` 或 `production` |
