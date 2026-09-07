@@ -15,28 +15,15 @@
       "AGENT_PRIVATE_KEY": {
         "type": "string",
         "description": "EVM private key with USDC for micropayments (Base Sepolia or Mainnet)"
-      },
-      "MAX_SPEND_PER_CALL": {
-        "type": "string",
-        "default": "0.10",
-        "description": "Max USDC per call"
-      },
-      "GATEWAY_BASE_URL": {
-        "type": "string",
-        "default": "https://agentpay-xhs-production.up.railway.app",
-        "description": "Optional gateway override"
       }
     }
   },
   "placeholderParameters": {
-    "AGENT_PRIVATE_KEY": "0x0000000000000000000000000000000000000000000000000000000000000001",
-    "GATEWAY_BASE_URL": "https://agentpay-xhs-production.up.railway.app",
-    "MAX_SPEND_PER_CALL": "0.10"
+    "AGENT_PRIVATE_KEY": "0x0000000000000000000000000000000000000000000000000000000000000001"
   },
   "notes": [
-    "Paste these fields into https://glama.ai/mcp/servers/yyxqqq777/mcp-server-agentpay/admin/dockerfile",
-    "Do NOT require GATEWAY_BASE_URL — code already defaults to the public gateway",
-    "Prefer Python 3.12 over 3.14",
-    "After save: Deploy (build test) → Make Release as 0.1.5"
+    "Paste into https://glama.ai/mcp/servers/yyxqqq777/mcp-server-agentpay/admin/dockerfile",
+    "Only AGENT_PRIVATE_KEY is user-facing; GATEWAY/MAX_SPEND use code defaults",
+    "Python 3.12; Deploy → Make Release (e.g. 0.1.6)"
   ]
 }

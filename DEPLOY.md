@@ -87,9 +87,9 @@ Glama **不会**用仓库里的 `Dockerfile` / `Dockerfile.mcp`。它在后台�
    - Build steps：`["uv sync"]`  
    - CMD：`["mcp-proxy","--","uv","run","mcp-server-agentpay"]`  
    - Env schema / Placeholder：直接复制 `scripts/glama-build-config.json` 里对应字段  
-   - **`required` 只能是 `AGENT_PRIVATE_KEY`**，不要把 `GATEWAY_BASE_URL` 设成必填
-4. **Deploy**（构建测试）→ 成功后 **Make Release**（如 `0.1.5`）
-5. 新开 Try in Browser，应看到 **4** 个工具
+   - **properties 里只留 `AGENT_PRIVATE_KEY`**（不要挂 GATEWAY / MAX_SPEND，否则 Try 弹窗会列出 3 项）
+4. **Deploy**（构建测试）→ 成功后 **Make Release**（如 `0.1.6`）
+5. 新开 Try in Browser：环境变量应只剩 **1** 项；Inspector 里工具仍是 **4** 个
 
 参考：https://glama.ai/blog/2026-03-15-how-to-make-a-release
 
