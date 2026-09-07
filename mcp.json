@@ -4,9 +4,7 @@
       "command": "uvx",
       "args": ["mcp-server-agentpay"],
       "env": {
-        "GATEWAY_BASE_URL": "https://agentpay-xhs-production.up.railway.app",
         "AGENT_PRIVATE_KEY": "${AGENT_PRIVATE_KEY}",
-        "MAX_SPEND_PER_CALL": "0.10",
         "PYTHONUNBUFFERED": "1"
       }
     }

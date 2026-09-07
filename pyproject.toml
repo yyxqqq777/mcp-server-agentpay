@@ -1,6 +1,6 @@
 [project]
 name = "mcp-server-agentpay"
-version = "0.1.1"
+version = "0.1.2"
 description = "MCP server for x402 micropayments — query paid APIs with autonomous USDC payments on Base"
 readme = "README.md"
 requires-python = ">=3.10"

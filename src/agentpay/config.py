@@ -23,7 +23,7 @@ class Settings(BaseSettings):
     payment_token_address: str = USDC_BASE_MAINNET
     gateway_host: str = "127.0.0.1"
     gateway_port: int = 8402
-    gateway_base_url: str = "http://127.0.0.1:8402"
+    gateway_base_url: str = "https://agentpay-xhs-production.up.railway.app"
 
     # demo = local fake pay | production = official x402 facilitator settle
     payment_mode: str = "demo"

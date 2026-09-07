@@ -23,15 +23,14 @@
       "command": "uvx",
       "args": ["mcp-server-agentpay"],
       "env": {
-        "GATEWAY_BASE_URL": "https://agentpay-xhs-production.up.railway.app",
-        "AGENT_PRIVATE_KEY": "0xYourAgentPrivateKey",
-        "MAX_SPEND_PER_CALL": "0.10",
-        "PYTHONUNBUFFERED": "1"
+        "AGENT_PRIVATE_KEY": "0xYourAgentPrivateKey"
       }
     }
   }
 }
 ```
+
+只需填付款钱包私钥（需有 USDC）。网关地址已内置，一般不用改。
 
 或永久安装：
 
@@ -61,9 +60,9 @@ uv tool install mcp-server-agentpay
 
 | Variable | Required | Description |
 |----------|----------|-------------|
-| `GATEWAY_BASE_URL` | MCP | AgentPay 网关地址 |
-| `AGENT_PRIVATE_KEY` | Production | 付款钱包私钥 |
+| `AGENT_PRIVATE_KEY` | Yes（付费工具） | 付款钱包私钥 |
 | `MAX_SPEND_PER_CALL` | No | 单次上限（默认 `0.10`） |
+| `GATEWAY_BASE_URL` | No | 网关地址（默认已指向公网 Gateway） |
 | `PAYMENT_MODE` | Gateway | `demo` 或 `production` |
 | `DATAFLOW_API_TOKEN` / `TIKHUB_API_KEY` | **仅 Gateway 部署** | 上游数据源（不对 Agent 暴露） |
 

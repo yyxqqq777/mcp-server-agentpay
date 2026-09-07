@@ -9,7 +9,7 @@
     "source": "github",
     "id": "1357808114"
   },
-  "version": "0.1.1",
+  "version": "0.1.2",
   "remotes": [
     {
       "type": "streamable-http",
@@ -20,24 +20,16 @@
     {
       "registryType": "pypi",
       "identifier": "mcp-server-agentpay",
-      "version": "0.1.1",
+      "version": "0.1.2",
       "transport": {
         "type": "stdio"
       },
       "runtimeHint": "uvx",
       "environmentVariables": [
         {
-          "name": "GATEWAY_BASE_URL",
-          "description": "URL of the x402 payment gateway (e.g. https://agentpay-xhs-production.up.railway.app)",
-          "isRequired": true,
-          "format": "string",
-          "isSecret": false,
-          "default": "https://agentpay-xhs-production.up.railway.app"
-        },
-        {
           "name": "AGENT_PRIVATE_KEY",
-          "description": "EVM private key for signing USDC micropayments on Base",
-          "isRequired": false,
+          "description": "EVM private key for signing USDC micropayments on Base (wallet must hold USDC)",
+          "isRequired": true,
           "format": "string",
           "isSecret": true
         },
@@ -50,12 +42,12 @@
           "default": "0.10"
         },
         {
-          "name": "PAYMENT_MODE",
-          "description": "Payment verification mode: demo (no on-chain) or production",
+          "name": "GATEWAY_BASE_URL",
+          "description": "Optional override of the AgentPay gateway URL",
           "isRequired": false,
           "format": "string",
           "isSecret": false,
-          "default": "production"
+          "default": "https://agentpay-xhs-production.up.railway.app"
         }
       ]
     }

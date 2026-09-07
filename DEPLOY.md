@@ -86,7 +86,7 @@ Smithery 代理入口：`https://agentpay--yyxqqq777.run.tools`
    https://glama.ai/mcp/servers/yyxqqq777/mcp-server-agentpay/admin/dockerfile  
    - Dockerfile path：`Dockerfile.mcp`（stdio MCP；不要用根目录 `Dockerfile`，那是 Railway Gateway）  
    - CMD：`mcp-server-agentpay`  
-   - 环境变量：`GATEWAY_BASE_URL`（默认 `https://agentpay-xhs-production.up.railway.app`）、`AGENT_PRIVATE_KEY`（secret）
+   - 环境变量：只需 `AGENT_PRIVATE_KEY`（secret）；网关地址已内置默认值
 4. 点 **Build**（或 **Build & Release**），成功后发布版本 `0.1.1`  
 5. （可选）若提交 Connector：URL 用 `https://agentpay-xhs-production.up.railway.app/mcp`
 
