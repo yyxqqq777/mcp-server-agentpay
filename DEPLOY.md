@@ -63,14 +63,15 @@ curl -X POST https://api.cdp.coinbase.com/platform/v2/x402/validate \
 4. 或 CLI：
 
 ```bash
-npx @smithery/cli auth login
+export SMITHERY_API_KEY=...   # https://smithery.ai/account/api-keys
 npx @smithery/cli mcp publish \
   "https://agentpay-xhs-production.up.railway.app/mcp" \
-  -n @yyxqqq777/agentpay \
+  -n yyxqqq777/agentpay \
   --config-schema ./scripts/smithery-config-schema.json
 ```
 
-本地 stdio 安装仍可用 `uvx mcp-server-agentpay`（见 `mcp.json` / `smithery.yaml`）。
+**已上架：** https://smithery.ai/servers/yyxqqq777/agentpay  
+Smithery 代理入口：`https://agentpay--yyxqqq777.run.tools`
 
 ## 4. Glama.ai
 
