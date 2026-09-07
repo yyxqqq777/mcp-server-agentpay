@@ -26,7 +26,6 @@ Dashboard：https://railway.com/project/aa132f03-a1f8-455b-9c0b-c61619dd308e
 | `PAYMENT_MODE` | `production` |
 | `WALLET_RECIPIENT_ADDRESS` | 你的收款地址 |
 | `PAYMENT_NETWORK` | 测试 `eip155:84532` / 主网 `eip155:8453` |
-| `DATAFLOW_API_TOKEN` / `TIKHUB_API_KEY` | 上游密钥（仅服务端） |
 | `X402_FACILITATOR_URL` | Sepolia: `https://x402.org/facilitator`；主网用 CDP |
 
 ## 2. x402 Bazaar（Coinbase 自动索引）
