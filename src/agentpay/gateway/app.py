@@ -43,7 +43,7 @@ def create_app() -> FastAPI:
             "Agents pay USDC on Base per request for Xiaohongshu note data and other premium APIs. "
             "Also exposes MCP tools at /mcp (Streamable HTTP)."
         ),
-        version="0.1.2",
+        version="0.1.3",
         lifespan=lifespan,
     )
     app.mount("/mcp", mcp_http)

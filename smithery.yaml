@@ -1,9 +1,26 @@
 # Smithery metadata for AgentPay (stdio MCP via uvx / GitHub)
 name: agentpay
+displayName: AgentPay
 description: >
-  Xiaohongshu (小红书) note & China social listening tools with x402 USDC
-  micropayments on Base. Agents pay per call via AgentPay gateway.
+  Pay-per-call Xiaohongshu (小红书) note & China wholesale pricing for AI agents.
+  Settles USDC on Base via x402. Users only configure AGENT_PRIVATE_KEY.
 homepage: https://github.com/yyxqqq777/mcp-server-agentpay
+icon: ./icon.svg
+keywords:
+  - mcp
+  - x402
+  - xiaohongshu
+  - 小红书
+  - usdc
+  - base
+  - micropayments
+  - agents
+  - china
+  - wholesale
+categories:
+  - payments
+  - data
+  - social
 startCommand:
   type: stdio
   configSchema:
